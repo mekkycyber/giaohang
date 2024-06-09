@@ -1,0 +1,97 @@
+<style>
+    .header-custom {
+        display: flex;
+        align-items: center;
+        gap: 30px; 
+        align-items:center;
+    }
+    .header-custom-right{
+        display: flex;
+        gap: 30px;
+    }
+    .btn-custom{
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+</style>
+<header class="bg-dark text-light py-3">
+    <div class="container">
+        <div class="header-custom">
+            <div class="col-md-3">
+                <h1 class="mb-0">Tạp hóa</h1>
+            </div>
+            <div class="col-md-6">
+                <form class="input-group">
+                    <input type="text" class="form-control" placeholder="Search watch...">
+                    <button class="btn btn-outline-light" type="button">Search</button>
+                </form>
+            </div>
+            <div class="col-md-3 text-end header-custom-right">
+                <a href="/cart-detail" class="btn btn-outline-light position-relative btn-custom">
+                    <svg width="30" height="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" class="d7ed-SwZDZ2"><g id="24-/-shopping-/-icon24_bag_default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><path d="m20.946 2 .994 17.89a2 2 0 0 1-1.886 2.107l-.111.003H4.057a2 2 0 0 1-2-2c0-.055 0-.055.003-.11L3.054 2h17.892Zm-1.892 2H4.946l-.889 16h15.886l-.889-16ZM9 6v2.5c0 1.248 1.385 2.5 3 2.5s3-1.252 3-2.5V6h2v2.5c0 2.4-2.323 4.5-5 4.5s-5-2.1-5-4.5V6h2Z" id="icon-background" fill="#6F787E" fill-rule="nonzero"></path></g></svg>
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill">0</span>
+                </a>
+                <% if (user) { %>
+                    <div class="dropdown d-inline-block">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Xin chào <%= user.fullname %>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="#">Thông tin</a></li>
+                          <li><a class="dropdown-item" href="#">Đơn hàng</a></li>
+                          <li><a class="dropdown-item" href="/login" id="logoutBtn">Đăng xuất</a></li>
+                        </ul>
+                      </div>
+                <% } else { %>
+                    <a class="btn btn-outline-light" href="/login">Login</a>
+                    <a class="btn btn-primary " href="/register">Sign Up</a>
+                <% } %>
+              
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <nav>
+                    <ul class="nav justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Customize</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">New Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<script>
+    document.getElementById('logoutBtn').addEventListener('click', function(event) {
+        event.preventDefault(); 
+
+        fetch('/logout', {
+            method: 'GET'
+        })
+        .then(response => {
+            
+            window.location.href = '/';
+        })
+        .catch(error => console.error('Error logging out:', error));
+    });
+</script>
